@@ -4,7 +4,7 @@ A calculator created in Agda and compiled to JS.
 - use [JavaScript Backend](https://agda.readthedocs.io/en/v2.5.4.2/tools/compilers.html): translates Agda code to JavaScript code.
 
 ### Requirements
-- must disable the agda-stdlib by editing ```~/.agda/defaults```
+- must disable the ```agda-stdlib``` by editing ```~/.agda/defaults```
 - have node.js installed
 
 

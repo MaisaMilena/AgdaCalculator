@@ -51,6 +51,9 @@ main _ = do
   let result = exe-operation 2 3 add
   print (show result)
 
+  -- let result2 = (primNatToChar (exe-operation 2 3 add))
+  -- print (primShowChar result2)
+
 
 
   -- for i from 0 to 10 do:

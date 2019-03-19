@@ -59,15 +59,3 @@ mod-helper k m (suc n)  zero   = mod-helper 0       m n m
 mod-helper k m (suc n) (suc j) = mod-helper (suc k) m n j
 
 {-# BUILTIN NATMODSUCAUX mod-helper #-}
-
--- TODO --
--- -- Division
--- _div_ : (dividend divisor : Nat) {≢0 : False (divisor ≟ 0)} → ℕ
--- (a div 0) {}
--- (a div suc n) = div-helper 0 n a n
---
--- -- Integer remainder (mod)
---
--- _%_ : (dividend divisor : ℕ) {≢0 : False (divisor ≟ 0)} → ℕ
--- (a % 0) {}
--- (a % suc n) = mod-helper 0 n a n

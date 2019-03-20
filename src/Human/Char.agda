@@ -21,5 +21,5 @@ primitive
   primCharEquality        : Char → Char → Bool
 
 -- {-# COMPILE JS primCharToNat = function(c) { return c.charCodeAt(0); } #-}
--- {-# COMPILE JS primNatToChar = function(c) { return parseInt(this.toString(), 10); } #-}
+-- {-# COMPILE JS primNatToChar = function(c) { return JSON.stringify(c); } #-}
 -- {-# COMPILE JS primCharEquality = function(c) { return function(d) { return c === d; }; } #-}

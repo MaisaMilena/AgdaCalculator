@@ -3,6 +3,8 @@ module Human.Equality where
 data _==_ {A : Set} (x : A) : A -> Set where
   refl : x == x
 
+{-# BUILTIN EQUALITY _==_ #-}
+
 sym : {A : Set} (x : A) (y : A) -> x == y -> y == x
 sym x .x refl = refl
 

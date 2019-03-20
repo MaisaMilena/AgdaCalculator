@@ -68,9 +68,8 @@ updateState s               clr          = init
 -- "num operation": update the numbers values
 updateState (state op m n) (num right x) = (state op m x)
 updateState (state op m n) (num left x)  = (state op x n)
--- execute an operation: the second element receives the result
-updateState (state op m n) (ope e) = (state e 0 (result (state e m n)))
-
+-- execute an operation
+updateState (state op m n) (ope e) = (state e m n)
 
 --------- Testing Calculator ---------
 testUpState0 : State -- add a number on the left
@@ -81,6 +80,10 @@ testUpState1 = (updateState testUpState0 (num right 1))
 
 testUpState2 : State -- executes an operation on both numbers
 testUpState2 = (updateState testUpState1 (ope add))
+
+-- A type of test as is usually done in other programming languages. Given some input what do I expect as result?
+testUpStateResult : (result (updateState testUpState1 (ope add))) == 2
+testUpStateResult = refl
 
 
 testUpState0a : State -- add a number on the left
@@ -93,6 +96,8 @@ testUpState2a : State -- executes an operation on both numbers
 testUpState2a = (updateState testUpState1a (ope mul))
 
 
+testUpState0b : State
+testUpState0b = (updateState testUpState2a (clr))
 
 --------- Theorems ---------
 -- Proofs that the result showing up an operation will always do that operation --
@@ -119,6 +124,9 @@ theorem-4 : ∀ (a b : Nat) -> Either (a == 1) (b == 1) -> Either ((a * b) == b)
 theorem-4 .1 b (fst refl) = fst (1*a b) -- A proof that 1 * b == b
 theorem-4 a .1 (snd refl) = snd (a*1 a) -- A proof that b * 1 == b
 
+-- Proof that update state works as expected
+update-theorem : ∀ (x y : Nat) → (s : State) → (result (updateState (updateState (updateState s (num left x)) (ope add)) (num right y))) == (x + y)
+update-theorem x y (state op m n) = refl
 
 
 

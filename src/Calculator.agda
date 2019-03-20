@@ -50,6 +50,49 @@ a*1 (suc a) rewrite a*1 a | a*0 a | x+0 a = refl
 1*a zero    = refl
 1*a (suc a) rewrite 1*a a = refl
 
+--------- Calculator ---------
+-- Initial state
+init : State
+init = (state add 0 0)
+
+-- Calculates the operation related to a state
+result : State -> Nat
+result (state add a b) = (a + b)
+result (state sub a b) = (a - b)
+result (state mul a b) = (a * b)
+
+-- Get the current State, an Event and update to a new State
+updateState : State -> Event -> State
+-- clear
+updateState s               clr          = init
+-- "num operation": update the numbers values
+updateState (state op m n) (num right x) = (state op m x)
+updateState (state op m n) (num left x)  = (state op x n)
+-- execute an operation: the second element receives the result
+updateState (state op m n) (ope e) = (state e 0 (result (state e m n)))
+
+
+--------- Testing Calculator ---------
+testUpState0 : State -- add a number on the left
+testUpState0 = (updateState init (num left 1))
+
+testUpState1 : State -- add a number on the right
+testUpState1 = (updateState testUpState0 (num right 1))
+
+testUpState2 : State -- executes an operation on both numbers
+testUpState2 = (updateState testUpState1 (ope add))
+
+
+testUpState0a : State -- add a number on the left
+testUpState0a = (updateState init (num left 3))
+
+testUpState1a : State -- add a number on the right
+testUpState1a = (updateState testUpState0a (num right 5))
+
+testUpState2a : State -- executes an operation on both numbers
+testUpState2a = (updateState testUpState1a (ope mul))
+
+
 
 --------- Theorems ---------
 -- Proofs that the result showing up an operation will always do that operation --
@@ -77,11 +120,6 @@ theorem-4 .1 b (fst refl) = fst (1*a b) -- A proof that 1 * b == b
 theorem-4 a .1 (snd refl) = snd (a*1 a) -- A proof that b * 1 == b
 
 
---------- Calculator ---------
-result : State -> Nat
-result (state add a b) = (a + b)
-result (state sub a b) = (a - b)
-result (state mul a b) = (a * b)
 
 
 

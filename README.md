@@ -1,9 +1,9 @@
-# Calculator in Agda compiled to JS
+# Simple calculator in Agda
 
-A calculator created in Agda and compiled to JS.
-- use [JavaScript Backend](https://agda.readthedocs.io/en/v2.5.4.2/tools/compilers.html): translates Agda code to JavaScript code.
+A calculator prototype created in Agda and that can compile to JS.
+- can use [JavaScript Backend](https://agda.readthedocs.io/en/v2.5.4.2/tools/compilers.html): translates Agda code to JavaScript code.
 
-### Requirements
+### Requirements to compile to JS
 - must disable the ```agda-stdlib``` by editing ```~/.agda/defaults```
 - have node.js installed
 
